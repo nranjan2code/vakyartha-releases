@@ -1,0 +1,19 @@
+#!/bin/sh
+# Before anything leaves this machine, the pushed commit must have passed the quick
+# tier here. A commit that already has a quick or full receipt is not run again.
+# Pushing only notes or tags skips the check.
+set -eu
+z=0000000000000000000000000000000000000000
+need=""
+while read -r local_ref local_sha remote_ref remote_sha; do
+  case "$local_ref" in refs/heads/*) [ "$local_sha" = "$z" ] || need="$need $local_sha" ;; esac
+done
+[ -n "$need" ] || exit 0
+for sha in $need; do
+  head=$(git rev-parse HEAD)
+  if git notes --ref ci show "$sha" 2>/dev/null | grep -Eq '^ "(quick|full|release)": \{"result":"pass"'; then continue; fi
+  if [ "$sha" != "$head" ]; then
+    echo "pre-push: $sha has no passing receipt and is not checked out; run: node scripts/ci.ts quick on it" >&2; exit 1
+  fi
+  node scripts/ci.ts quick
+done

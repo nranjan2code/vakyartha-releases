@@ -1,0 +1,3 @@
+#!/bin/sh
+# Refuse a commit whose staged files look like they hold a secret.
+exec node scripts/ci.ts secrets --staged
