@@ -30,7 +30,7 @@ code, pre { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .
 nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; position: relative; z-index: 1; }
 .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
 .brand img { width: 36px; height: 36px; border-radius: 9px; }
-.brand span { font-weight: 650; letter-spacing: .01em; font-size: 18px; }
+.brand .wordmark { width: auto; height: 22px; border-radius: 0; }
 .links { display: flex; gap: 22px; font-size: 15px; }
 .links a { text-decoration: none; opacity: .82; }
 .links a:hover, .links a:focus-visible { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
@@ -47,7 +47,9 @@ h1 { font-size: clamp(38px, 6vw, 60px); line-height: 1.05; margin: 0 0 18px; let
 .btn[aria-disabled="true"] { opacity: .55; pointer-events: none; }
 .btn small { font-weight: 500; opacity: .8; font-size: 13px; }
 .meta { margin-top: 16px; font-size: 14px; color: #B8BDCC; }
-.card-hero { background: rgba(246,245,241,.06); border: 1px solid rgba(246,245,241,.14); border-radius: 18px; padding: 26px; backdrop-filter: blur(4px); }
+.hero-side { display: grid; gap: 20px; justify-items: center; }
+.songbird { width: min(220px, 60%); height: auto; filter: drop-shadow(0 18px 40px rgba(0,0,0,.35)); }
+.card-hero { width: 100%; background: rgba(246,245,241,.06); border: 1px solid rgba(246,245,241,.14); border-radius: 18px; padding: 26px; backdrop-filter: blur(4px); }
 .card-hero h2 { margin: 0 0 6px; font-size: 15px; font-weight: 600; color: #B8BDCC; text-transform: uppercase; letter-spacing: .06em; }
 .card-hero .ver { font-size: 34px; font-weight: 750; letter-spacing: -.01em; }
 .card-hero dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; margin: 16px 0 0; font-size: 14px; }
@@ -94,6 +96,7 @@ footer a { color: var(--muted); }
   .hero-body { grid-template-columns: 1fr; gap: 28px; padding: 32px 0 56px; }
   .features { grid-template-columns: 1fr 1fr; }
   .links a:not(.keep) { display: none; }
+  .songbird { width: 140px; }
 }
 @media (max-width: 520px) {
   .wrap { padding: 0 16px; }
@@ -109,7 +112,7 @@ footer a { color: var(--muted); }
 <header class="hero">
   <div class="wrap">
     <nav aria-label="Main">
-      <a class="brand" href="#top" aria-label="Vakyartha home"><img src="assets/icon.svg" alt=""><span>Vakyartha</span></a>
+      <a class="brand" href="#top" aria-label="Vakyartha home"><img src="assets/icon.svg" alt=""><img class="wordmark" src="assets/wordmark-reverse.svg" alt="Vakyartha"></a>
       <div class="links"><a href="#download" class="keep">Download</a><a href="#verify">Verify</a><a href="#releases">Releases</a><a href="https://vakyartha.com">vakyartha.com</a></div>
     </nav>
     <div class="hero-body" id="top">
@@ -123,6 +126,8 @@ footer a { color: var(--muted); }
         </div>
         <p class="meta" id="dl-meta">Loading the latest release…</p>
       </div>
+      <div class="hero-side">
+      <img class="songbird" src="assets/songbird-reverse.svg" alt="The Vakyartha Songbird">
       <aside class="card-hero" aria-labelledby="latest-h">
         <h2 id="latest-h">Latest release</h2>
         <div class="ver" id="latest-ver">—</div>
@@ -130,9 +135,10 @@ footer a { color: var(--muted); }
           <dt>Build</dt><dd id="latest-build">—</dd>
           <dt>Released</dt><dd id="latest-date">—</dd>
           <dt>Signed by</dt><dd>the owner's release key</dd>
-          <dt>Contains</dt><dd>the app only; source is never published</dd>
+          <dt>Includes</dt><dd>checksums and a signed release record</dd>
         </dl>
       </aside>
+      </div>
     </div>
   </div>
 </header>
@@ -188,7 +194,7 @@ openssl pkeyutl -verify -pubin -inkey release.pem -rawin -in runtime-manifest.js
 
 <footer>
   <div class="wrap">
-    <span>© 2026 Nisheeth Ranjan. Vakyartha is proprietary software. Binaries only.</span>
+    <span>© 2026 Nisheeth Ranjan. All rights reserved.</span>
     <span><a href="https://vakyartha.com">vakyartha.com</a> · <a href="https://nranjan2code.github.io/vakyartha-capabilities/">Apps and skills catalog</a> · <a href="https://github.com/nranjan2code/vakyartha-releases">Releases repository</a></span>
   </div>
 </footer>

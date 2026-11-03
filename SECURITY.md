@@ -11,9 +11,9 @@
 - The builds are not yet signed with an Apple Developer ID or notarized, so macOS cannot vouch for them; the owner's signature is the check.
 - A signature proves who published a build, not that the software is free of defects. Known limits of each release are in its notes and on [vakyartha.com](https://vakyartha.com).
 
-## Public boundary
+## What is in this repository
 
-This repository contains only binaries, checksums, signed records, the public key and the download page. It contains no source code and no secrets, links to no private repository, and its workflows read nothing outside it.
+This repository contains release builds, checksums, signed records, the public key and the download page. It holds no secrets, and its workflows read nothing outside it.
 
 ## Reporting a problem
 

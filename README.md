@@ -1,6 +1,19 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="site/assets/lockup-reverse.svg">
+    <img src="site/assets/lockup-colour.svg" width="360" alt="Vakyartha">
+  </picture>
+</p>
+
+<p align="center"><b>Ask. Then go live your day.</b><br>Signed release builds of Vakyartha for macOS.</p>
+
+<p align="center"><a href="https://nranjan2code.github.io/vakyartha-releases/"><b>Download Vakyartha</b></a> · <a href="https://vakyartha.com">vakyartha.com</a> · <a href="https://nranjan2code.github.io/vakyartha-capabilities/">Apps and skills catalog</a></p>
+
+---
+
 # Vakyartha releases
 
-Signed release builds of [Vakyartha](https://vakyartha.com), the private desktop assistant that answers with working interfaces. This repository holds **binaries only**: Vakyartha's source code is never published.
+Signed release builds of [Vakyartha](https://vakyartha.com), the private desktop assistant that answers with working interfaces.
 
 **Download page:** <https://nranjan2code.github.io/vakyartha-releases/>
 
@@ -43,7 +56,7 @@ The release key is [`release.pub`](release.pub) (raw Ed25519, hex) and [`release
 | `site/` | The download page and `releases.json`, the list of published releases |
 | `release.pub`, `release.pem` | The public release key |
 | `scripts/verify.ts` | Verify a downloaded release |
-| `scripts/publish.ts` | Owner only: stage a release build, refuse any source, publish it |
+| `scripts/publish.ts` | Owner only: stage, check and publish a release build |
 | `scripts/check.ts`, `scripts/public-boundary.ts` | Rules for this repository |
 | `scripts/ci.ts` | Local checks, hooks and receipts |
 
@@ -56,4 +69,4 @@ The release key is [`release.pub`](release.pub) (raw Ed25519, hex) and [`release
 | [AGENTS.md](AGENTS.md) | Rules for changing this repository |
 | [dev-skills/](dev-skills/README.md) | The maintainer skill |
 
-Copyright © 2026 Nisheeth Ranjan. Vakyartha is proprietary software. No source code is provided.
+Copyright © 2026 Nisheeth Ranjan. All rights reserved.
