@@ -44,7 +44,7 @@ for (const r of data.releases ?? []) {
 
 for (const k of ["release.pub", "release.pem"]) if (!existsSync(path.join(repo, "site", k)) || read(`site/${k}`) !== read(k)) problems.push(`site/${k} must be an exact copy of ${k}`);
 const page = read("site/index.html");
-for (const asset of ["assets/icon.svg", "assets/songbird-reverse.svg", "assets/InterVariable.woff2"]) {
+for (const asset of ["assets/icon.svg", "assets/songbird-colour.svg", "assets/songbird-reverse.svg", "assets/wordmark-colour.svg", "assets/wordmark-reverse.svg"]) {
   if (!page.includes(asset)) problems.push(`site/index.html does not use ${asset}`);
   if (!existsSync(path.join(repo, "site", asset))) problems.push(`site/${asset} is missing`);
 }
