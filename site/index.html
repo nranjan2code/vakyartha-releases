@@ -36,6 +36,7 @@ code, pre { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 1
 .brand-bird { display: block; width: 38px; height: 43px; background: var(--bird) center/contain no-repeat; }
 .brand-word { display: block; width: 133px; height: 29px; background: var(--word) center/contain no-repeat; }
 .rail-nav, .rail-actions { display: flex; align-items: center; gap: 28px; }
+.notice p { font-size: 13px; line-height: 1.6; max-width: 760px; }
 .rail-nav a { color: var(--muted); font-size: 14px; }
 .rail-actions { gap: 16px; }
 .theme-button { display: grid; place-items: center; min-width: 44px; height: 44px; background: none; border: 0; color: var(--ink); border-radius: 12px; }
@@ -163,7 +164,7 @@ footer a { color: var(--muted); }
 
   <section class="section" id="install">
     <div class="wrap">
-      <div class="section-heading"><h2>Install</h2><p>macOS on Apple Silicon. Use a free local model through a local model runner, or a hosted model with your own key.</p></div>
+      <div class="section-heading"><h2>Install</h2><p>macOS on Apple Silicon. Everything it needs is inside the app: nothing else to install. Use a free local model through a local model runner, or a hosted model with your own key. After the first install, Vakyartha updates itself when you say so.</p></div>
       <ol class="steps">
         <li><b>Download and move</b><p>Open the DMG and drag Vakyartha to Applications.</p></li>
         <li><b>Allow it once</b><p>On first launch, open System Settings, Privacy &amp; Security, and choose Open Anyway. Builds are not yet notarized by Apple.</p></li>
@@ -190,6 +191,12 @@ openssl pkeyutl -verify -pubin \
     <div class="wrap">
       <div class="section-heading"><h2>Releases</h2><p>Each release is numbered by version and build. A build number is never reused.</p></div>
       <div id="release-list"><div class="panel"><div class="empty">Loading releases.</div></div></div>
+    </div>
+  </section>
+
+  <section class="section notice" id="notice" aria-label="Notice">
+    <div class="wrap">
+      <p>Vakyartha 1.0.0 (Alpha 1) is a preview for personal, non-commercial use. It is provided as is, without warranty of any kind, and with no guarantee of results, accuracy, availability or security. Do not install it on production machines or use it with critical or sensitive data. Answers come from AI models and can be wrong; actions you approve are your responsibility. Models and services you connect have their own terms. Vakyartha collects no usage data. The full notice is in the app, under Settings, About.</p>
     </div>
   </section>
 </main>
