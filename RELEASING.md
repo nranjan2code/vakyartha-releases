@@ -14,8 +14,8 @@ How a Vakyartha build becomes a public release here. **Owner** steps are done by
    ```bash
    node scripts/publish.ts stage <path to the Vakyartha checkout>
    ```
-   It copies the DMG, zips the app, copies the release record and the release notes into `staging/<tag>/` (never committed). It **refuses** a bundle that carries source: source files, source maps, repository metadata, or engine bundles that are not minified.
-2. **Sign the record** (owner): run the command `stage` prints, Vakyartha's `release-signing.ts sign staging/<tag>/runtime-manifest.json`, type the version and build, approve the Keychain prompt.
+   It copies the DMG, zips the app, copies the release record, the public notes (`release-notes/X.Y.Z.md` in the Vakyartha checkout) and the stage (`stage.txt`) into `staging/<tag>/` (never committed). It **refuses** a bundle that carries source: source files, source maps, repository metadata, or engine bundles that are not minified.
+2. **Sign the record** (owner): run the command `stage` prints, Vakyartha's `release-signing.ts sign staging/<tag>/runtime-manifest.json`, type `X.Y.Z+BUILD` (**no** `v`), approve the Keychain prompt.
 3. **Publish** (owner):
    ```bash
    node scripts/publish.ts release staging/<tag>
@@ -26,7 +26,10 @@ How a Vakyartha build becomes a public release here. **Owner** steps are done by
    node scripts/publish.ts feed <path to the Vakyartha checkout> staging/<tag> --rollout 1
    ```
    It writes the signed update file for the staged app ZIP (the owner types the build number and approves the Keychain prompt) and replaces it on the `update-feed` release, which installed Vakyartha reads. Widen with `--rollout 10`, then `100`; republish with a lower rollout to halt.
-5. **Check**: the Pages workflow deploys the download page; `node scripts/ci.ts full` downloads the release back from GitHub and verifies it.
+5. **Install and update as a person would**: `curl -fsSL https://nranjan2code.github.io/vakyartha-releases/install.sh | sh` installs the latest release (checksum and signing identity checked, no security prompt); an installed older release offers the new one beside Settings. The Terminal installer is the only public install path until builds are notarized.
+6. **Check**: the Pages workflow deploys the download page; `node scripts/ci.ts full` downloads the release back from GitHub and verifies it. `node scripts/stats.ts` shows downloads, updates and update checks.
+
+The publish prompt wants `vX.Y.Z+BUILD` (**with** the `v`); the update file prompt wants the build number. One terminal tab can run steps 1 to 4 in order (see Vakyartha's `vak-release` skill). This checkout commits as `116259289+nranjan2code@users.noreply.github.com` (`git config --local user.email`); GitHub refuses pushes that expose the owner's private address. A release with a stage is created as a pre-release titled with it, and its stage is recorded in `site/releases.json`.
 
 ## Counting downloads and updates
 

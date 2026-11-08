@@ -9,7 +9,7 @@ Rules: [AGENTS.md](../../AGENTS.md). Procedure: [RELEASING.md](../../RELEASING.m
 
 ## Publish a release
 
-Follow [RELEASING.md](../../RELEASING.md): `publish.ts stage` → owner signs the record → `publish.ts release`. Never skip `stage`'s source guard, never upload by hand, and never publish anything but the five release files.
+Follow [RELEASING.md](../../RELEASING.md): `publish.ts stage` → owner signs the record (no `v`) → `publish.ts release` (types the tag with `v`) → `publish.ts feed` (signs the update file) → install with `site/install.sh` and check an older release updates. Counts: `scripts/stats.ts`. Public notes come from the Vakyartha checkout's `release-notes/X.Y.Z.md`. Never skip `stage`'s source guard, never upload by hand, and never publish anything but the five release files.
 
 ## Change the download page
 
