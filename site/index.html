@@ -54,6 +54,10 @@ code, pre { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 1
 .hero h1 span { display: block; }
 .hero h1 span:last-child { padding-left: .55em; }
 .lede { font-size: 18px; margin: 28px 0 36px; max-width: 520px; }
+.install-cmd { display: flex; align-items: center; gap: 10px; max-width: 640px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--soft); }
+.install-cmd code { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; color: var(--ink); }
+.install-cmd button { flex: none; padding: 6px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); font: inherit; font-size: 13px; cursor: pointer; }
+.install-cmd button:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 28px; }
 .meta { font-size: 14px; margin-top: 22px; }
 
@@ -142,10 +146,11 @@ footer a { color: var(--muted); }
       <p class="eyebrow">Vakyartha for Mac</p>
       <h1><span>Ask.</span><span>Then go live</span><span>your day.</span></h1>
       <p class="lede">A private assistant for your Mac: working answers, hands-free voice and real apps. It runs on a free local model, and your chats stay on your Mac.</p>
-      <div class="actions">
-        <a class="action-link primary" id="dl-dmg" href="#releases" aria-disabled="true"><span>Download for Mac <span id="dl-size"></span></span><svg class="arrow" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 2v9M3 7l4 4 4-4"/></svg></a>
-        <a class="text-link" id="dl-zip" href="#releases" hidden>App ZIP</a>
+      <div class="install-cmd">
+        <code id="install-cmd">curl -fsSL https://nranjan2code.github.io/vakyartha-releases/install.sh | sh</code>
+        <button type="button" id="copy-cmd" aria-label="Copy the install command">Copy</button>
       </div>
+      <p class="meta">Open Terminal, paste the command and press Return. It downloads the latest release, checks it, puts Vakyartha in Applications and opens it.</p>
       <p class="meta" id="dl-meta">Loading the latest release.</p>
     </div>
     <div class="panel" role="region" aria-labelledby="latest-h">
@@ -166,8 +171,8 @@ footer a { color: var(--muted); }
     <div class="wrap">
       <div class="section-heading"><h2>Install</h2><p>macOS on Apple Silicon. Everything it needs is inside the app: nothing else to install. Use a free local model through a local model runner, or a hosted model with your own key. After the first install, Vakyartha updates itself when you say so.</p></div>
       <ol class="steps">
-        <li><b>Download and move</b><p>Open the DMG and drag Vakyartha to Applications.</p></li>
-        <li><b>Allow it once</b><p>On first launch, open System Settings, Privacy &amp; Security, and choose Open Anyway. Builds are not yet notarized by Apple.</p></li>
+        <li><b>Open Terminal</b><p>In Applications, Utilities. Vakyartha installs from Terminal until its builds are notarized by Apple; this way there is no security prompt to get past.</p></li>
+        <li><b>Paste and press Return</b><p>The command checks the download against its published checksum and Vakyartha's signing identity before it installs. Run it again any time to reinstall the latest release.</p></li>
         <li><b>Ask for something</b><p>A plan, a comparison, a dashboard. The answer arrives as something you can use.</p></li>
       </ol>
     </div>
@@ -189,7 +194,7 @@ openssl pkeyutl -verify -pubin \
 
   <section class="section" id="releases">
     <div class="wrap">
-      <div class="section-heading"><h2>Releases</h2><p>Each release is numbered by version and build. A build number is never reused.</p></div>
+      <div class="section-heading"><h2>Releases</h2><p>Each release is numbered by version and build, and a build number is never reused. These are the files for checking a release; to install, use the command at the top.</p></div>
       <div id="release-list"><div class="panel"><div class="empty">Loading releases.</div></div></div>
     </div>
   </section>
@@ -212,6 +217,7 @@ openssl pkeyutl -verify -pubin \
 (() => {
   const DL = "https://github.com/nranjan2code/vakyartha-releases/releases/download/";
   const $ = id => document.getElementById(id);
+  $("copy-cmd").addEventListener("click", () => navigator.clipboard.writeText($("install-cmd").textContent).then(() => { $("copy-cmd").textContent = "Copied"; setTimeout(() => { $("copy-cmd").textContent = "Copy"; }, 1600); }, () => {}));
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
   const size = n => n >= 1e9 ? (n / 1e9).toFixed(2) + " GB" : n >= 1e6 ? (n / 1e6).toFixed(1) + " MB" : n >= 1e3 ? Math.round(n / 1e3) + " KB" : n + " bytes";
   const url = (tag, name) => DL + encodeURIComponent(tag) + "/" + encodeURIComponent(name);
@@ -247,9 +253,6 @@ openssl pkeyutl -verify -pubin \
       return;
     }
     const latest = list[0];
-    const dmg = latest.assets.find(a => a.name.endsWith(".dmg")), zip = latest.assets.find(a => a.name.endsWith(".app.zip"));
-    if (dmg) { $("dl-dmg").href = url(latest.tag, dmg.name); $("dl-dmg").removeAttribute("aria-disabled"); $("dl-size").textContent = "· " + size(dmg.bytes); }
-    if (zip) { $("dl-zip").href = url(latest.tag, zip.name); $("dl-zip").hidden = false; }
     $("dl-meta").textContent = "Version " + latest.version + ", build " + latest.build + ", " + day(latest.date) + ".";
     $("latest-ver").firstChild.textContent = latest.version; $("latest-sub").textContent = latest.platform;
     $("latest-build").textContent = latest.build; $("latest-date").textContent = day(latest.date);

@@ -29,7 +29,17 @@ Open the [download page](https://nranjan2code.github.io/vakyartha-releases/) or 
 | `runtime-manifest.json` | The release record: version, build and the exact component versions it was built from |
 | `runtime-manifest.json.sig` | The owner's Ed25519 signature of the release record |
 
-Builds are not yet signed with an Apple Developer ID. On first launch, allow the app under **System Settings → Privacy & Security → Open Anyway**.
+## Install
+
+Open Terminal, paste this and press Return:
+
+```bash
+curl -fsSL https://nranjan2code.github.io/vakyartha-releases/install.sh | sh
+```
+
+It downloads the latest release's app ZIP, checks it against `SHA256SUMS.txt` and Vakyartha's signing identity, puts Vakyartha in Applications and opens it. Builds are not yet notarized by Apple, and installing this way avoids the security prompt a browser download gets. After the first install, Vakyartha updates itself when you say so.
+
+Vakyartha is a preview for personal, non-commercial use, provided as is, without warranty. Do not install it on production machines.
 
 ## Verify
 
