@@ -217,6 +217,7 @@ openssl pkeyutl -verify -pubin \
 (() => {
   const DL = "https://github.com/nranjan2code/vakyartha-releases/releases/download/";
   const $ = id => document.getElementById(id);
+  const shown = r => r.version + (r.stage ? " (" + r.stage + ")" : "");
   $("copy-cmd").addEventListener("click", () => navigator.clipboard.writeText($("install-cmd").textContent).then(() => { $("copy-cmd").textContent = "Copied"; setTimeout(() => { $("copy-cmd").textContent = "Copy"; }, 1600); }, () => {}));
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
   const size = n => n >= 1e9 ? (n / 1e9).toFixed(2) + " GB" : n >= 1e6 ? (n / 1e6).toFixed(1) + " MB" : n >= 1e3 ? Math.round(n / 1e3) + " KB" : n + " bytes";
@@ -253,11 +254,11 @@ openssl pkeyutl -verify -pubin \
       return;
     }
     const latest = list[0];
-    $("dl-meta").textContent = "Version " + latest.version + ", build " + latest.build + ", " + day(latest.date) + ".";
-    $("latest-ver").firstChild.textContent = latest.version; $("latest-sub").textContent = latest.platform;
+    $("dl-meta").textContent = "Version " + shown(latest) + ", build " + latest.build + ", " + day(latest.date) + ".";
+    $("latest-ver").firstChild.textContent = latest.version; $("latest-sub").textContent = (latest.stage ? latest.stage + " · " : "") + latest.platform;
     $("latest-build").textContent = latest.build; $("latest-date").textContent = day(latest.date);
     $("release-list").innerHTML = list.map((r, i) =>
-      '<article class="panel release"><div class="panel-top"><b>Vakyartha ' + esc(r.version) + (i === 0 ? '<span class="tag">Latest</span>' : "") + '</b><span>Build ' + esc(r.build) + " · " + esc(day(r.date)) + "</span></div>" +
+      '<article class="panel release"><div class="panel-top"><b>Vakyartha ' + esc(shown(r)) + (i === 0 ? '<span class="tag">Latest</span>' : "") + '</b><span>Build ' + esc(r.build) + " · " + esc(day(r.date)) + "</span></div>" +
       '<div class="notes">' + notes(r.notes) + "</div>" +
       "<table><thead><tr><th>File</th><th>Size</th><th>SHA-256</th></tr></thead><tbody>" +
       r.assets.map(a => '<tr><td><a href="' + esc(url(r.tag, a.name)) + '">' + esc(a.name) + '</a><span class="hash-inline">' + esc(a.sha256) + '</span></td><td class="size">' + size(a.bytes) +

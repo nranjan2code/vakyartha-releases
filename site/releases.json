@@ -35,7 +35,8 @@
           "bytes": 372,
           "sha256": "db67bf07fe416b724130061575cc3b9ebba22f273a1ff3b7e16194c37a56ea17"
         }
-      ]
+      ],
+      "stage": "Alpha 1"
     },
     {
       "version": "1.0.0",
@@ -70,7 +71,8 @@
           "bytes": 372,
           "sha256": "7a45fb65fef6a338cf5defe3a05ccddf68c98d44f483832b21c5af5e34981040"
         }
-      ]
+      ],
+      "stage": "Alpha 1"
     }
   ]
 }

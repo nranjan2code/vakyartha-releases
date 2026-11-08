@@ -99,7 +99,7 @@ async function release(dir: string) {
   await confirmTyped(`Publish Vakyartha ${t[1]} build ${t[2]} publicly as`, tag);
   const all = [...files, "SHA256SUMS.txt"];
   data.releases.unshift({
-    version: t[1], build: t[2], tag, date: new Date().toISOString().slice(0, 10), platform: "macOS on Apple Silicon", notes,
+    version: t[1], ...(existsSync(path.join(dir, "stage.txt")) && readFileSync(path.join(dir, "stage.txt"), "utf8").trim() ? { stage: readFileSync(path.join(dir, "stage.txt"), "utf8").trim() } : {}), build: t[2], tag, date: new Date().toISOString().slice(0, 10), platform: "macOS on Apple Silicon", notes,
     assets: all.map(name => ({ name, bytes: statSync(path.join(dir, name)).size, sha256: sha256(path.join(dir, name)) })),
   });
   writeFileSync(path.join(repo, "site/releases.json"), JSON.stringify(data, null, 2) + "\n");
