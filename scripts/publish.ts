@@ -48,13 +48,14 @@ export function sourceGuard(app: string): string[] {
   return problems;
 }
 
+// Public notes are written for people installing Vakyartha: release-notes/<version>.md in the
+// checkout. CHANGELOG.md is the internal record and is never published.
 function notesFor(checkout: string, version: string): string {
-  const log = readFileSync(path.join(checkout, "CHANGELOG.md"), "utf8");
-  const m = new RegExp(`^## ${version.replace(/\./g, "\\.")}\\b.*$([\\s\\S]*?)(?=^## |(?![\\s\\S]))`, "m").exec(log);
-  if (!m) throw new Error(`CHANGELOG.md has no "## ${version}" section; write the release notes first.`);
-  const notes = m[1]!.trim();
+  const file = path.join(checkout, "release-notes", `${version}.md`);
+  if (!existsSync(file)) throw new Error(`No public notes at release-notes/${version}.md; write them for people installing Vakyartha (not the internal CHANGELOG).`);
+  const notes = readFileSync(file, "utf8").trim();
   // Public notes name no private repository, path or commit link.
-  if (/github\.com\/nranjan2code\/(vakyartha|Projection|sandbox)(?![-\w])|\]\((?!https?:)/.test(notes)) throw new Error("The CHANGELOG section links a private repository or a repository file; rewrite it for a public reader.");
+  if (/github\.com\/nranjan2code\/(vakyartha|Projection|sandbox)(?![-\w])|\]\((?!https?:)/.test(notes)) throw new Error("The public notes link a private repository or a repository file; rewrite them for a public reader.");
   return notes;
 }
 
@@ -78,6 +79,9 @@ async function stage(checkout: string) {
   execFileSync("ditto", ["-c", "-k", "--keepParent", app, path.join(out, `Vakyartha_${vakyartha.version}_${arch}.app.zip`)]);
   copyFileSync(record, path.join(out, "runtime-manifest.json"));
   writeFileSync(path.join(out, "release-notes.md"), notesFor(checkout, vakyartha.version) + "\n");
+  // A release stage ("Alpha 1") names the release and marks it a pre-release on GitHub.
+  const stageLabel = (JSON.parse(readFileSync(path.join(checkout, "package.json"), "utf8")) as { stage?: string }).stage ?? "";
+  writeFileSync(path.join(out, "stage.txt"), stageLabel + "\n");
   console.log(`Staged ${tag} in ${path.relative(repo, out)}. Now sign the record (owner):\n  node ${path.join(checkout, "scripts/release-signing.ts")} sign ${path.join(out, "runtime-manifest.json")}\nthen: node scripts/publish.ts release ${path.relative(repo, out)}`);
 }
 
@@ -106,7 +110,9 @@ async function release(dir: string) {
   run("git", ["push", "origin", "main", tag]);
   const body = `${notes}\n\n---\nBuild ${t[2]}. Verify before installing: download every file into one folder, then \`shasum -a 256 -c SHA256SUMS.txt\`; to check the owner's signature, \`node scripts/verify.ts <folder> ${tag}\` from this repository. Not yet signed with an Apple Developer ID: allow it under System Settings, Privacy & Security.`;
   writeFileSync(path.join(dir, "release-body.md"), body + "\n");
-  run("gh", ["release", "create", tag, "-R", REPO, "--verify-tag", "--title", `Vakyartha ${t[1]}`, "--notes-file", path.join(dir, "release-body.md"), ...all.map(f => path.join(dir, f))]);
+  const stageFile = path.join(dir, "stage.txt");
+  const stageLabel = existsSync(stageFile) ? readFileSync(stageFile, "utf8").trim() : "";
+  run("gh", ["release", "create", tag, "-R", REPO, "--verify-tag", ...(stageLabel ? ["--prerelease"] : []), "--title", stageLabel ? `Vakyartha ${t[1]} (${stageLabel})` : `Vakyartha ${t[1]}`, "--notes-file", path.join(dir, "release-body.md"), ...all.map(f => path.join(dir, f))]);
   console.log(`Published ${tag}. The download page updates when the Pages workflow finishes.`);
 }
 

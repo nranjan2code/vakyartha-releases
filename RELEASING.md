@@ -5,7 +5,7 @@ How a Vakyartha build becomes a public release here. **Owner** steps are done by
 ## Before you start
 
 - The build was made with Vakyartha's `release-build.ts`, which reserved its `vX.Y.Z+YYMMDDNN` tag, and passed its `release` check tier.
-- Its `CHANGELOG.md` has a `## X.Y.Z` section written for a public reader (no links to private repositories or files).
+- It has `release-notes/X.Y.Z.md`: short public notes for people installing Vakyartha (what they get, before you install, the notice), with no links to private repositories or files. The internal `CHANGELOG.md` is never published.
 - This repository is clean on `main` and `node scripts/ci.ts full` passes.
 
 ## Steps
