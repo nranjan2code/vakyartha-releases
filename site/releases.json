@@ -4,6 +4,41 @@
   "releases": [
     {
       "version": "1.0.0",
+      "build": "26110803",
+      "tag": "v1.0.0+26110803",
+      "date": "2026-11-08",
+      "platform": "macOS on Apple Silicon",
+      "notes": "The first public preview of Vakyartha for Mac. Ask in plain words, and get an answer you can use: a plan, a comparison, a dashboard or an app.\n\n**What you get**\n\n- A free local model, or a hosted model with your own key. Your chats stay on your Mac.\n- Answers that arrive as tables, charts, forms and apps, beside the chat.\n- Apps and skills from the Vakyartha catalog, each added only after you review it.\n- Everything it needs is inside the app, and it updates itself when you say so.\n\n**Before you install**\n\n- macOS on Apple Silicon.\n- Not yet notarized by Apple: on first launch, open System Settings, Privacy & Security, and choose Open Anyway.\n- Building or changing an app by chatting is not yet reliable with local models.\n\n**Notice**\n\nA preview for personal, non-commercial use, provided as is, without warranty of any kind and with no guarantee of results, accuracy, availability or security. Do not install it on production machines or use it with critical or sensitive data. The full notice is in the app under Settings, About.",
+      "assets": [
+        {
+          "name": "Vakyartha_1.0.0_aarch64.app.zip",
+          "bytes": 81382567,
+          "sha256": "5fce9c9314ebc69fc090d8eef3fda10151b90949d354f3b933eeecbe437c3aff"
+        },
+        {
+          "name": "Vakyartha_1.0.0_aarch64.dmg",
+          "bytes": 97328499,
+          "sha256": "92e1c230df4bb1cca3d40ea5dd2ef3da044e743d90c2b366184a1cc75ec33779"
+        },
+        {
+          "name": "runtime-manifest.json",
+          "bytes": 3520,
+          "sha256": "4d689728e4f9b93a6a88be5315eb5be0d5b67dd60ab5fbd6ef21512b40eb3d47"
+        },
+        {
+          "name": "runtime-manifest.json.sig",
+          "bytes": 129,
+          "sha256": "dc181bf8d7967b3520e468090cf0c827cf09cfe374c96e2bd0354e2ef5545d17"
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "bytes": 372,
+          "sha256": "db67bf07fe416b724130061575cc3b9ebba22f273a1ff3b7e16194c37a56ea17"
+        }
+      ]
+    },
+    {
+      "version": "1.0.0",
       "build": "26110801",
       "tag": "v1.0.0+26110801",
       "date": "2026-11-08",
