@@ -4,75 +4,39 @@
   "releases": [
     {
       "version": "1.0.0",
-      "build": "26110803",
-      "tag": "v1.0.0+26110803",
+      "stage": "Alpha 1",
+      "build": "26110804",
+      "tag": "v1.0.0+26110804",
       "date": "2026-11-08",
       "platform": "macOS on Apple Silicon",
-      "notes": "The first public preview of Vakyartha for Mac. Ask in plain words, and get an answer you can use: a plan, a comparison, a dashboard or an app.\n\n**What you get**\n\n- A free local model, or a hosted model with your own key. Your chats stay on your Mac.\n- Answers that arrive as tables, charts, forms and apps, beside the chat.\n- Apps and skills from the Vakyartha catalog, each added only after you review it.\n- Everything it needs is inside the app, and it updates itself when you say so.\n\n**Before you install**\n\n- macOS on Apple Silicon.\n- Not yet notarized by Apple: on first launch, open System Settings, Privacy & Security, and choose Open Anyway.\n- Building or changing an app by chatting is not yet reliable with local models.\n\n**Notice**\n\nA preview for personal, non-commercial use, provided as is, without warranty of any kind and with no guarantee of results, accuracy, availability or security. Do not install it on production machines or use it with critical or sensitive data. The full notice is in the app under Settings, About.",
+      "notes": "The first public preview of Vakyartha for Mac. Ask in plain words, and get an answer you can use: a plan, a comparison, a dashboard or an app.\n\n**What you get**\n\n- A free local model, or a hosted model with your own key. Your chats stay on your Mac.\n- Answers that arrive as tables, charts, forms and apps, beside the chat.\n- Apps and skills from the Vakyartha catalog. The apps Vakyartha ships work as soon as you open them, with no setup; you can review or change what each one may do in its Access panel, or turn this off in Settings.\n- Everything it needs is inside the app, and it updates itself when you say so.\n\n**Before you install**\n\n- macOS on Apple Silicon.\n- Not yet notarized by Apple: on first launch, open System Settings, Privacy & Security, and choose Open Anyway.\n- Building or changing an app by chatting is not yet reliable with local models.\n\n**Notice**\n\nA preview for personal, non-commercial use, provided as is, without warranty of any kind and with no guarantee of results, accuracy, availability or security. Do not install it on production machines or use it with critical or sensitive data. The full notice is in the app under Settings, About.",
       "assets": [
         {
           "name": "Vakyartha_1.0.0_aarch64.app.zip",
-          "bytes": 81382567,
-          "sha256": "5fce9c9314ebc69fc090d8eef3fda10151b90949d354f3b933eeecbe437c3aff"
+          "bytes": 81393939,
+          "sha256": "47d2037e758042a355ad91ed79c0c6db9066f22860dc282383f6ebb8588a5f67"
         },
         {
           "name": "Vakyartha_1.0.0_aarch64.dmg",
-          "bytes": 97328499,
-          "sha256": "92e1c230df4bb1cca3d40ea5dd2ef3da044e743d90c2b366184a1cc75ec33779"
+          "bytes": 97338022,
+          "sha256": "7621dce0f8848f1e8afe67eff0be9c85c8ea140da7105e8e47b2962079f8e107"
         },
         {
           "name": "runtime-manifest.json",
           "bytes": 3520,
-          "sha256": "4d689728e4f9b93a6a88be5315eb5be0d5b67dd60ab5fbd6ef21512b40eb3d47"
+          "sha256": "06dc2278c8108ad7f4d158e4a1bd4d7b55cedc55e21cbb8f1f79c18f03e98fe3"
         },
         {
           "name": "runtime-manifest.json.sig",
           "bytes": 129,
-          "sha256": "dc181bf8d7967b3520e468090cf0c827cf09cfe374c96e2bd0354e2ef5545d17"
+          "sha256": "5a840f9b2687a55355135ea6d92727db17caf71d781bf93401132581a2a4ae5d"
         },
         {
           "name": "SHA256SUMS.txt",
           "bytes": 372,
-          "sha256": "db67bf07fe416b724130061575cc3b9ebba22f273a1ff3b7e16194c37a56ea17"
+          "sha256": "0ddd592a07fd933f6fc6356b7d3d69e8b3141d8ff28cb897a611f8aada3e48e6"
         }
-      ],
-      "stage": "Alpha 1"
-    },
-    {
-      "version": "1.0.0",
-      "build": "26110801",
-      "tag": "v1.0.0+26110801",
-      "date": "2026-11-08",
-      "platform": "macOS on Apple Silicon",
-      "notes": "The first public preview of Vakyartha for Mac. Ask in plain words, and get an answer you can use: a plan, a comparison, a dashboard or an app.\n\n**What you get**\n\n- A free local model, or a hosted model with your own key. Your chats stay on your Mac.\n- Answers that arrive as tables, charts, forms and apps, beside the chat.\n- Apps and skills from the Vakyartha catalog, each added only after you review it.\n- Everything it needs is inside the app, and it updates itself when you say so.\n\n**Before you install**\n\n- macOS on Apple Silicon.\n- Not yet notarized by Apple: on first launch, open System Settings, Privacy & Security, and choose Open Anyway.\n- Building or changing an app by chatting is not yet reliable with local models.\n\n**Notice**\n\nA preview for personal, non-commercial use, provided as is, without warranty of any kind and with no guarantee of results, accuracy, availability or security. Do not install it on production machines or use it with critical or sensitive data. The full notice is in the app under Settings, About.",
-      "assets": [
-        {
-          "name": "Vakyartha_1.0.0_aarch64.app.zip",
-          "bytes": 81382572,
-          "sha256": "58e11c7f277f684f22b07baf5e09ff5879ad5a37205d9affc5eb7e403eba072e"
-        },
-        {
-          "name": "Vakyartha_1.0.0_aarch64.dmg",
-          "bytes": 97319428,
-          "sha256": "11a16f7f4af9aaff539f8802a813d53336b8beebf30fe38c99bc2fe00fd55be4"
-        },
-        {
-          "name": "runtime-manifest.json",
-          "bytes": 3520,
-          "sha256": "1c34ef0b15309f9573fac224dcde588982ae328e04c84fb55f614b97cb111d7d"
-        },
-        {
-          "name": "runtime-manifest.json.sig",
-          "bytes": 129,
-          "sha256": "e275617fc95a130d9b06d3d96af0882803f167c1ddc01c2e628f8a56583a2530"
-        },
-        {
-          "name": "SHA256SUMS.txt",
-          "bytes": 372,
-          "sha256": "7a45fb65fef6a338cf5defe3a05ccddf68c98d44f483832b21c5af5e34981040"
-        }
-      ],
-      "stage": "Alpha 1"
+      ]
     }
   ]
 }
