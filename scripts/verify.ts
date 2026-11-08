@@ -25,7 +25,8 @@ export function verifyRecord(record: Buffer, signatureHex: string, publicHex: st
 
 export function verifyRelease(dir: string, tag?: string, publicHex = readFileSync(path.join(here, "release.pub"), "utf8").trim()): { version: string; build: string } {
   const problems: string[] = [];
-  const present = readdirSync(dir).filter(f => !f.startsWith(".") && f !== "release-notes.md");
+  // Staging-only files the publisher reads (notes, body, stage) are never uploaded.
+  const present = readdirSync(dir).filter(f => !f.startsWith(".") && !["release-notes.md", "release-body.md", "stage.txt"].includes(f));
   for (const f of present) if (!ALLOWED.some(r => r.test(f))) problems.push(`${f} is not a release file; a release carries only the app, checksums and the signed record`);
 
   const sumsFile = path.join(dir, "SHA256SUMS.txt");
