@@ -125,11 +125,11 @@ ok "Signed by Vakyartha's release identity"
 
 # --- 4. Install -----------------------------------------------------------------
 head "Installing to $DEST"
-if pgrep -f "$DEST/Vakyartha.app/Contents/MacOS/" >/dev/null 2>&1; then
+if pgrep -f "^$DEST/Vakyartha.app/Contents/MacOS/" >/dev/null 2>&1; then
   note "Quitting the running Vakyartha"
   /usr/bin/osascript -e 'quit app "Vakyartha"' >/dev/null 2>&1 || true
   n=0
-  while pgrep -f "$DEST/Vakyartha.app/Contents/MacOS/" >/dev/null 2>&1; do
+  while pgrep -f "^$DEST/Vakyartha.app/Contents/MacOS/" >/dev/null 2>&1; do
     n=$((n + 1)); [ "$n" -lt 30 ] || fail "Vakyartha is still running; quit it and run this again."; sleep 1
   done
 fi
@@ -150,13 +150,13 @@ head "Opening Vakyartha"
 # Right after a replacement macOS can drop the first open; wait for the app and open it again once.
 /usr/bin/open "$DEST/Vakyartha.app" || true
 n=0
-while ! pgrep -f "$DEST/Vakyartha.app/Contents/MacOS/vakyartha" >/dev/null 2>&1; do
+while ! pgrep -f "^$DEST/Vakyartha.app/Contents/MacOS/vakyartha" >/dev/null 2>&1; do
   n=$((n + 1))
   [ "$n" -eq 6 ] && { /usr/bin/open "$DEST/Vakyartha.app" || true; }
   [ "$n" -lt 15 ] || break
   sleep 1
 done
-if pgrep -f "$DEST/Vakyartha.app/Contents/MacOS/vakyartha" >/dev/null 2>&1; then ok "Running"; else note "Open Vakyartha from $DEST."; fi
+if pgrep -f "^$DEST/Vakyartha.app/Contents/MacOS/vakyartha" >/dev/null 2>&1; then ok "Running"; else note "Open Vakyartha from $DEST."; fi
 
 printf '\n%s%s✓ Vakyartha %s is ready.%s Its apps work straight away, and it updates itself when you say so.\n' "$G" "$B" "$VERSION${STAGE:+ ($STAGE)}" "$N"
 printf '%sA preview for personal, non-commercial use, provided as is, without warranty. Not for production machines.%s\n\n' "$D" "$N"
