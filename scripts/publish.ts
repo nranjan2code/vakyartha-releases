@@ -3,6 +3,8 @@
 //   node scripts/publish.ts stage <vakyartha checkout>   copy the build out and refuse any source
 //   node <vakyartha checkout>/scripts/release-signing.ts sign staging/<tag>/runtime-manifest.json
 //   node scripts/publish.ts release staging/<tag>         verify, confirm, publish
+//   node scripts/publish.ts feed <vakyartha checkout> staging/<tag> --rollout N [--min N] [--block N,N]
+//                                                         offer it to installed apps: write, sign (owner), upload
 // Vakyartha's source code is never published: only the app (DMG and ZIP), checksums and
 // the signed record leave the machine, and stage refuses a bundle that carries source.
 import { execFileSync } from "node:child_process";
@@ -108,10 +110,33 @@ async function release(dir: string) {
   console.log(`Published ${tag}. The download page updates when the Pages workflow finishes.`);
 }
 
+// Installed Vakyartha checks one signed update file per platform, kept on the fixed
+// "update-feed" release. Republishing it with another rollout widens, halts or rolls back the offer.
+async function feed(checkout: string, dir: string, args: string[]) {
+  const tag = path.basename(dir);
+  const t = TAG.exec(tag);
+  if (!t) throw new Error(`${dir} is not a staged release folder (vX.Y.Z+YYMMDDNN).`);
+  const zip = readdirSync(dir).find(f => f.endsWith(".app.zip"));
+  if (!zip) throw new Error(`No app ZIP in ${dir}.`);
+  const option = (name: string, fallback: string) => { const at = args.indexOf(`--${name}`); return at < 0 ? fallback : args[at + 1] ?? fallback; };
+  const tool = path.join(checkout, "scripts/update-feed.ts");
+  const url = `https://github.com/${REPO}/releases/download/${encodeURIComponent(tag)}/${zip}`;
+  run(process.execPath, [tool, "write", "stable", "--zip", path.join(dir, zip), "--version", t[1]!, "--sequence", t[2]!, "--url", url,
+    "--notes-file", path.join(dir, "release-notes.md"), "--rollout", option("rollout", "1"), "--min", option("min", "0"), "--block", option("block", ""), "--out", dir]);
+  const file = readdirSync(dir).find(f => /^stable-darwin-.+\.json$/.test(f));
+  if (!file) throw new Error("The update file was not written.");
+  run(process.execPath, [tool, "sign", "stable", path.join(dir, file)]);
+  const tags = execFileSync("gh", ["release", "list", "-R", REPO, "--json", "tagName", "-q", ".[].tagName"], { encoding: "utf8" }).split("\n");
+  if (!tags.includes("update-feed")) run("gh", ["release", "create", "update-feed", "-R", REPO, "--prerelease", "--title", "Update feed", "--notes", "The signed update files installed Vakyartha reads. Downloads are on the releases page."]);
+  run("gh", ["release", "upload", "update-feed", path.join(dir, file), path.join(dir, `${file}.sig`), "--clobber", "-R", REPO]);
+  console.log(`Installed Vakyartha now sees ${tag} at ${option("rollout", "1")}% rollout.`);
+}
+
 if (import.meta.main) {
   const [command, target] = process.argv.slice(2);
   if (process.platform !== "darwin") throw new Error("Releases are published from the owner's Mac.");
   if (command === "stage" && target) await stage(path.resolve(target));
   else if (command === "release" && target) await release(path.resolve(target));
-  else { console.error("usage: node scripts/publish.ts stage <vakyartha checkout> | release staging/<tag>"); process.exit(2); }
+  else if (command === "feed" && target && process.argv[4]) await feed(path.resolve(target), path.resolve(process.argv[4]), process.argv.slice(5));
+  else { console.error("usage: node scripts/publish.ts stage <vakyartha checkout> | release staging/<tag> | feed <vakyartha checkout> staging/<tag> --rollout N"); process.exit(2); }
 }
