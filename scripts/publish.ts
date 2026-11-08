@@ -94,14 +94,15 @@ async function release(dir: string) {
   writeFileSync(path.join(dir, "SHA256SUMS.txt"), files.map(f => `${sha256(path.join(dir, f))}  ${f}`).join("\n") + "\n");
   verifyRelease(dir, tag);
   const data = JSON.parse(readFileSync(path.join(repo, "site/releases.json"), "utf8")) as { releases: unknown[] };
-  if ((data.releases as { tag: string }[]).some(r => r.tag === tag)) throw new Error(`${tag} is already published.`);
+  if ((data.releases as { tag: string }[]).some(r => r.tag === tag) || git("tag", "-l", tag)) throw new Error(`${tag} is already published.`);
   const notes = readFileSync(path.join(dir, "release-notes.md"), "utf8").trim();
   await confirmTyped(`Publish Vakyartha ${t[1]} build ${t[2]} publicly as`, tag);
   const all = [...files, "SHA256SUMS.txt"];
-  data.releases.unshift({
+  // The page shows the latest release only; earlier builds stay as tags and in git history.
+  data.releases = [{
     version: t[1], ...(existsSync(path.join(dir, "stage.txt")) && readFileSync(path.join(dir, "stage.txt"), "utf8").trim() ? { stage: readFileSync(path.join(dir, "stage.txt"), "utf8").trim() } : {}), build: t[2], tag, date: new Date().toISOString().slice(0, 10), platform: "macOS on Apple Silicon", notes,
     assets: all.map(name => ({ name, bytes: statSync(path.join(dir, name)).size, sha256: sha256(path.join(dir, name)) })),
-  });
+  }];
   writeFileSync(path.join(repo, "site/releases.json"), JSON.stringify(data, null, 2) + "\n");
   run(process.execPath, ["scripts/check.ts"]);
   run("git", ["add", "site/releases.json"]);
