@@ -120,7 +120,10 @@ async function feed(checkout: string, dir: string, args: string[]) {
   if (!zip) throw new Error(`No app ZIP in ${dir}.`);
   const option = (name: string, fallback: string) => { const at = args.indexOf(`--${name}`); return at < 0 ? fallback : args[at + 1] ?? fallback; };
   const tool = path.join(checkout, "scripts/update-feed.ts");
-  const url = `https://github.com/${REPO}/releases/download/${encodeURIComponent(tag)}/${zip}`;
+  // Updates download their own copy on the update-feed release, so its download count is the
+  // number of updates and the version release's counts stay manual downloads (scripts/stats.ts).
+  const update = `Vakyartha_${t[1]}_${t[2]}_${/_(aarch64|x64)\.app\.zip$/.exec(zip)?.[1] ?? "aarch64"}.update.zip`;
+  const url = `https://github.com/${REPO}/releases/download/update-feed/${update}`;
   run(process.execPath, [tool, "write", "stable", "--zip", path.join(dir, zip), "--version", t[1]!, "--sequence", t[2]!, "--url", url,
     "--notes-file", path.join(dir, "release-notes.md"), "--rollout", option("rollout", "1"), "--min", option("min", "0"), "--block", option("block", ""), "--out", dir]);
   const file = readdirSync(dir).find(f => /^stable-darwin-.+\.json$/.test(f));
@@ -128,6 +131,9 @@ async function feed(checkout: string, dir: string, args: string[]) {
   run(process.execPath, [tool, "sign", "stable", path.join(dir, file)]);
   const tags = execFileSync("gh", ["release", "list", "-R", REPO, "--json", "tagName", "-q", ".[].tagName"], { encoding: "utf8" }).split("\n");
   if (!tags.includes("update-feed")) run("gh", ["release", "create", "update-feed", "-R", REPO, "--prerelease", "--title", "Update feed", "--notes", "The signed update files installed Vakyartha reads. Downloads are on the releases page."]);
+  copyFileSync(path.join(dir, zip), path.join(dir, update));
+  // The package first, then the update file naming it.
+  run("gh", ["release", "upload", "update-feed", path.join(dir, update), "--clobber", "-R", REPO]);
   run("gh", ["release", "upload", "update-feed", path.join(dir, file), path.join(dir, `${file}.sig`), "--clobber", "-R", REPO]);
   console.log(`Installed Vakyartha now sees ${tag} at ${option("rollout", "1")}% rollout.`);
 }

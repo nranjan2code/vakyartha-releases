@@ -28,13 +28,17 @@ How a Vakyartha build becomes a public release here. **Owner** steps are done by
    It writes the signed update file for the staged app ZIP (the owner types the build number and approves the Keychain prompt) and replaces it on the `update-feed` release, which installed Vakyartha reads. Widen with `--rollout 10`, then `100`; republish with a lower rollout to halt.
 5. **Check**: the Pages workflow deploys the download page; `node scripts/ci.ts full` downloads the release back from GitHub and verifies it.
 
+## Counting downloads and updates
+
+`node scripts/stats.ts` prints GitHub's own download counters, pure numbers with nothing about who downloaded: per release the DMG and ZIP downloads (installs by hand), the update packages on `update-feed` (updates, one copy per build so they are not mixed with manual downloads), and the update file's count (update checks). Installed Vakyartha sends nothing of its own.
+
 ## If GitHub is unavailable
 
 Steps 1 and 2 need no network. Keep `staging/<tag>/` and run step 3 when GitHub is back. The release is never assembled anywhere but the owner's Mac.
 
 ## Never
 
-- Never upload anything that is not one of the five release files, except the signed update file and its signature on the `update-feed` release, and never source code in any form.
+- Never upload anything that is not one of the five release files, except the signed update file, its signature and the update package copy on the `update-feed` release, and never source code in any form.
 - Never edit, replace or delete a published release or its entry; publish a new build instead.
 - Never reuse a build number, and never publish a development build (`build: "dev"`).
 
