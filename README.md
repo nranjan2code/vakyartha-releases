@@ -63,7 +63,7 @@ The release key is [`release.pub`](release.pub) (raw Ed25519, hex) and [`release
 
 | Path | Purpose |
 | --- | --- |
-| `site/` | The download page and `releases.json`, the list of published releases |
+| `site/` | The download page and `releases.json`, which lists the latest release |
 | `release.pub`, `release.pem` | The public release key |
 | `scripts/verify.ts` | Verify a downloaded release |
 | `scripts/publish.ts` | Owner only: stage, check and publish a release build |
