@@ -1,5 +1,41 @@
 {
   "schema": 1,
   "product": "Vakyartha",
-  "releases": []
+  "releases": [
+    {
+      "version": "1.0.0",
+      "build": "26110801",
+      "tag": "v1.0.0+26110801",
+      "date": "2026-11-08",
+      "platform": "macOS on Apple Silicon",
+      "notes": "Vakyartha 1.0.0 (Alpha 1) is a preview for personal, non-commercial use. It is provided as is, without warranty of any kind, and with no guarantee of results, accuracy, availability or security. Do not install it on production machines or use it with critical or sensitive data. The full notice is in Settings → About.\n\nKnown limits in this preview: building or changing an app by chatting is not yet reliable with the local model; macOS on Apple Silicon only; the app is not notarized, so the first open needs System Settings → Privacy & Security → Open Anyway once. Everything it needs (its engine, Node.js and the sandbox) is inside the app; a local model through Ollama and language tools for sandbox commands are optional and offered in the app.\n\nFirst release under one discipline for Vakyartha, Projection, the sandbox and the catalog. Built on Projection `4c246f9` and vak-sandbox `0445145`, every part at 1.0.0; ships Vakyartha Capabilities 1.0.1.\n\n- An open canvas takes the centre of the window and the chat moves to a resizable column on its right, or its left with Swap sides; closing the canvas puts the chat back in the centre. On narrow windows the chat is a drawer over the canvas. The switch animates and keeps the draft, focus and reading position.\n- Local models without a manual setup: at start Vakyartha detects Ollama and offers to install the latest signed release or start it. It stays optional.\n- The tagline is now \"Ask. Then go live your day.\", and About ends with short release notices and the full notice one click away.\n- Providers is a short list with Connected, Available and Custom server tabs, and each provider opens on its own page.\n- Vakyartha updates itself after the first install. A small banner offers a new version; Install and restart lists what is running, lets it finish, restarts into the new version and restores the previous one if the new one does not start. Settings → General → Updates chooses whether to be told, download first or never check.\n- An app, integration or task whose process was killed without a cleanup receipt no longer blocks later work once no process of that run remains. An interrupted task still waits for review.\n- Quitting from the menu is a clean exit even when an app or integration is slow to stop, so the next launch no longer reports an unexpected stop. Recovery from a real crash is silent: the startup notice now appears only when a background app is blocked or failed, or apps were held back as asked.\n- A hosted app that leaves a tool call unawaited no longer has its instance stopped with an \"Unknown app instance command\" error when the reply arrives after the command finished; the late reply is dropped.\n- A tool reply whose text holds a Unicode line or paragraph separator (common in news feeds) no longer splits on the app channel and stops the instance with \"Unknown app instance command\"; the channel is framed on newlines only, as the host frames it.\n- An app instance that ends without a cleanup receipt while Vakyartha is running (a crash, or a helper that cannot confirm its exit) no longer stops the app with an \"inspect native completion\" error. The pool records it internally and starts a fresh instance, retrying quietly while the old process finishes.\n- Sandbox commands can compile and run Rust, Python and Go: Settings → Sandbox installs them in one click at pinned versions, and a missing program now says so.\n- Release plans: each release's plan (`release-plans/`) decides which core skills, built-in integrations and product features ship, sit behind a runtime flag, are compiled out, redacted or retired. The release build and its artifact check enforce it; runtime flags are listed in Settings → General and stay off until turned on.\n- Dependencies: quick-xml 0.42.0 (through plist 1.10.3) fixes two high-severity advisories; the sandbox moves to zstd 0.13.4 with every direct dependency pinned exactly.\n- The Vakyartha catalog is its own signed repository, pinned as `capabilities/`: 13 apps, 29 skills and 17 declarative integrations. Vakyartha keeps 18 core skills of its own.\n- Catalog installs verify the owner's signature and the exact reviewed version and hash in Rust, and arrive as drafts. Browse the catalog in Apps, Skills and Integrations; the Library page is removed.\n- Shipped items show Changed with an exact reset; updates are never confused with a person's changes. Part-of-Vakyartha and part-of-app skills cannot be uninstalled; items whose requirements are missing pause.\n- Every app runs in the sandbox on `node26`; the host engine is removed.\n- Versions are set only by a person; release builds carry an 8-digit build number and a signed record of every part.\n- Older external discovery is now Public directories; the Integrations page is titled Integrations.\n- Catalog 1.0.1 (its earlier 1.0.0 and 1.1.0 releases were withdrawn and re-cut as 1.0.0, then 1.0.1) adds Task Planner and Video Studio, app brand colours and icons, direct view navigation, shorter skill procedures with references, and Wish Radar's honest declined-read messages, canonical product links and price parsing that rejects EMI amounts. Captured-response regression tests cover these Wish Radar fixes; the installed-app outcome remains unverified.\n- Packaging validates the sandbox against the app commit's submodule pin, retaining clean-source and exact-revision checks without a second stale pin.\n\n1.0.0 is the first public release.",
+      "assets": [
+        {
+          "name": "Vakyartha_1.0.0_aarch64.app.zip",
+          "bytes": 81382572,
+          "sha256": "58e11c7f277f684f22b07baf5e09ff5879ad5a37205d9affc5eb7e403eba072e"
+        },
+        {
+          "name": "Vakyartha_1.0.0_aarch64.dmg",
+          "bytes": 97319428,
+          "sha256": "11a16f7f4af9aaff539f8802a813d53336b8beebf30fe38c99bc2fe00fd55be4"
+        },
+        {
+          "name": "runtime-manifest.json",
+          "bytes": 3520,
+          "sha256": "1c34ef0b15309f9573fac224dcde588982ae328e04c84fb55f614b97cb111d7d"
+        },
+        {
+          "name": "runtime-manifest.json.sig",
+          "bytes": 129,
+          "sha256": "e275617fc95a130d9b06d3d96af0882803f167c1ddc01c2e628f8a56583a2530"
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "bytes": 372,
+          "sha256": "7a45fb65fef6a338cf5defe3a05ccddf68c98d44f483832b21c5af5e34981040"
+        }
+      ]
+    }
+  ]
 }
