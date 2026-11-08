@@ -70,4 +70,12 @@ mv "$DEST/Vakyartha.app.new" "$DEST/Vakyartha.app"
 
 say "Vakyartha $TAG is installed. Opening it."
 say "A preview for personal, non-commercial use, provided as is, without warranty. Not for production machines."
-/usr/bin/open "$DEST/Vakyartha.app"
+# Right after a replacement macOS can drop the first open; wait for the app and open it again once.
+/usr/bin/open "$DEST/Vakyartha.app" || true
+n=0
+while ! pgrep -f "$DEST/Vakyartha.app/Contents/MacOS/vakyartha" >/dev/null 2>&1; do
+  n=$((n + 1))
+  [ "$n" -eq 6 ] && /usr/bin/open "$DEST/Vakyartha.app" || true
+  [ "$n" -lt 15 ] || { say "Open Vakyartha from Applications."; exit 0; }
+  sleep 1
+done
