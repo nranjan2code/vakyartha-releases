@@ -5,36 +5,36 @@
     {
       "version": "1.0.0",
       "stage": "Alpha 1",
-      "build": "26110806",
-      "tag": "v1.0.0+26110806",
-      "date": "2026-11-08",
+      "build": "26110901",
+      "tag": "v1.0.0+26110901",
+      "date": "2026-11-09",
       "platform": "macOS on Apple Silicon",
-      "notes": "The first public preview of Vakyartha for Mac. Ask in plain words, and get an answer you can use: a plan, a comparison, a dashboard or an app.\n\n**What you get**\n\n- A free local model, or a hosted model with your own key. Your chats stay on your Mac.\n- Answers that arrive as tables, charts, forms and apps, beside the chat.\n- Apps and skills from the Vakyartha catalog. The apps Vakyartha ships work as soon as you open them, with no setup; you can review or change what each one may do in its Access panel, or turn this off in Settings.\n- Everything it needs is inside the app, and it updates itself when you say so.\n\n**Before you install**\n\n- macOS on Apple Silicon.\n- Not yet notarized by Apple: on first launch, open System Settings, Privacy & Security, and choose Open Anyway.\n- Building or changing an app by chatting is not yet reliable with local models.\n\n**Notice**\n\nA preview for personal, non-commercial use, provided as is, without warranty of any kind and with no guarantee of results, accuracy, availability or security. Do not install it on production machines or use it with critical or sensitive data. The full notice is in the app under Settings, About.",
+      "notes": "The first public preview of Vakyartha for Mac. Ask in plain words, and get an answer you can use: a plan, a comparison, a dashboard or an app.\n\n**What you get**\n\n- A free local model, or a hosted model with your own key. Your chats stay on your Mac.\n- Answers that arrive as tables, charts, forms and apps, beside the chat.\n- Apps and skills from the Vakyartha catalog. The apps Vakyartha ships work as soon as you open them, with no setup; you can review or change what each one may do in its Access panel, or turn this off in Settings.\n- Document Desk: keep your documents in one searchable library and ask about them in chat.\n- Everything it needs is inside the app, and it updates itself when you say so.\n\n**Before you install**\n\n- macOS on Apple Silicon.\n- Not yet notarized by Apple: on first launch, open System Settings, Privacy & Security, and choose Open Anyway.\n- Building or changing an app by chatting is not yet reliable with local models.\n\n**Notice**\n\nA preview for personal, non-commercial use, provided as is, without warranty of any kind and with no guarantee of results, accuracy, availability or security. Do not install it on production machines or use it with critical or sensitive data. The full notice is in the app under Settings, About.",
       "assets": [
         {
           "name": "Vakyartha_1.0.0_aarch64.app.zip",
-          "bytes": 81343039,
-          "sha256": "a0c784626d43bd47c199b0cec5fc4edba85adf8234d6000a566cc9c43b0a347e"
+          "bytes": 81435099,
+          "sha256": "29e033baeda411ff83cc394ce22e76b3af8e24230df232b19839c407ae905103"
         },
         {
           "name": "Vakyartha_1.0.0_aarch64.dmg",
-          "bytes": 98128459,
-          "sha256": "e7075615fb9969ceb4a88159a2bb8f266ec647dd01c6427affcb5ce4cb6d2717"
+          "bytes": 96884752,
+          "sha256": "94889f38fbd3e51006deb72aeb530e519682be18da780fd998dede64722ef9b2"
         },
         {
           "name": "runtime-manifest.json",
           "bytes": 3520,
-          "sha256": "4576b69e4b2a14aa38c606ec2963766b5c4530556c8443c6318ffa5d53fdd13d"
+          "sha256": "f4154dff5de954aa4451eb9ee7081f12324c8bb33ee03fbc55e37a0f0048d6fb"
         },
         {
           "name": "runtime-manifest.json.sig",
           "bytes": 129,
-          "sha256": "4589b6a5847562805978165a909e100ce7ead462a6d70ccdcd7c1fa535f51488"
+          "sha256": "3674dc4a202bcab3aa9a9f2d5e869f2483ef5d6ae009217f59e7f05764d8c2a7"
         },
         {
           "name": "SHA256SUMS.txt",
           "bytes": 372,
-          "sha256": "33cf53058bdf8d51a032c079ab0937c0ce3c2c7823adadfaf90e993c4665fa97"
+          "sha256": "98f4fca3670e030b2bb2f2cbcdcbea25feb7493ca23944cde2fca02b588122c5"
         }
       ]
     }
