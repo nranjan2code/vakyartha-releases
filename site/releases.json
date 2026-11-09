@@ -5,36 +5,36 @@
     {
       "version": "1.0.0",
       "stage": "Alpha 1",
-      "build": "26110901",
-      "tag": "v1.0.0+26110901",
+      "build": "26110902",
+      "tag": "v1.0.0+26110902",
       "date": "2026-11-09",
       "platform": "macOS on Apple Silicon",
       "notes": "The first public preview of Vakyartha for Mac. Ask in plain words, and get an answer you can use: a plan, a comparison, a dashboard or an app.\n\n**What you get**\n\n- A free local model, or a hosted model with your own key. Your chats stay on your Mac.\n- Answers that arrive as tables, charts, forms and apps, beside the chat.\n- Apps and skills from the Vakyartha catalog. The apps Vakyartha ships work as soon as you open them, with no setup; you can review or change what each one may do in its Access panel, or turn this off in Settings.\n- Document Desk: keep your documents in one searchable library and ask about them in chat.\n- Everything it needs is inside the app, and it updates itself when you say so.\n\n**Before you install**\n\n- macOS on Apple Silicon.\n- Not yet notarized by Apple: on first launch, open System Settings, Privacy & Security, and choose Open Anyway.\n- Building or changing an app by chatting is not yet reliable with local models.\n\n**Notice**\n\nA preview for personal, non-commercial use, provided as is, without warranty of any kind and with no guarantee of results, accuracy, availability or security. Do not install it on production machines or use it with critical or sensitive data. The full notice is in the app under Settings, About.",
       "assets": [
         {
           "name": "Vakyartha_1.0.0_aarch64.app.zip",
-          "bytes": 81435099,
-          "sha256": "29e033baeda411ff83cc394ce22e76b3af8e24230df232b19839c407ae905103"
+          "bytes": 81435137,
+          "sha256": "44c6e61815ec9c722aa9465eaf3f944a2f7e1759fecd36db157f674e21ca85da"
         },
         {
           "name": "Vakyartha_1.0.0_aarch64.dmg",
-          "bytes": 96884752,
-          "sha256": "94889f38fbd3e51006deb72aeb530e519682be18da780fd998dede64722ef9b2"
+          "bytes": 96757523,
+          "sha256": "537c887564f88a07be378662e9d066d74ec81bf68e2089cfdcf6453500822bbb"
         },
         {
           "name": "runtime-manifest.json",
           "bytes": 3520,
-          "sha256": "f4154dff5de954aa4451eb9ee7081f12324c8bb33ee03fbc55e37a0f0048d6fb"
+          "sha256": "55b04fef9c7443bece4904447e982c7328283337d0f3fbcb40d7922b209ea89a"
         },
         {
           "name": "runtime-manifest.json.sig",
           "bytes": 129,
-          "sha256": "3674dc4a202bcab3aa9a9f2d5e869f2483ef5d6ae009217f59e7f05764d8c2a7"
+          "sha256": "1a449b7d44ce59385a6448908f8670f4e50c814392d04f376e1dd4de17a7febf"
         },
         {
           "name": "SHA256SUMS.txt",
           "bytes": 372,
-          "sha256": "98f4fca3670e030b2bb2f2cbcdcbea25feb7493ca23944cde2fca02b588122c5"
+          "sha256": "032bc8e2b590931e1367554abb0ac985617fcb1a5783ce1e5cb06bfb30a96be9"
         }
       ]
     }
